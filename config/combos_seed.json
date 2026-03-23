@@ -1,0 +1,7 @@
+{
+  "combos": [
+    {"name": "ASO", "skills": ["ai-engineer", "ai-ml", "quant-analyst", "mlops-engineer"]},
+    {"name": "SMA", "skills": ["monetization", "pricing-strategy", "saas-mvp-launcher", "startup-financial-modeling"]},
+    {"name": "Frontend", "skills": ["CSS-Master", "UI-Framework-Expert"]}
+  ]
+}
