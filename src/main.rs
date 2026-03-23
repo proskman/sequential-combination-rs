@@ -8,11 +8,12 @@ mod dna_extractor;
 mod config_loader;
 
 use anyhow::Result;
-use rmcp::ServiceExt;
+use rmcp::Server;
 use server::SequentialCombinationServer;
 use tokio::io::{stdin, stdout};
 use tracing::info;
 use tracing_subscriber::{fmt, EnvFilter};
+use std::sync::Arc;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -33,7 +34,9 @@ async fn main() -> Result<()> {
     let server = SequentialCombinationServer::new().await?;
     info!("✅ Server ready — listening on stdio.");
 
-    let service = server.serve((stdin(), stdout())).await?;
-    service.waiting().await?;
+    let server_task = Server::new(stdin(), stdout(), Arc::new(server));
+    info!("✅ Server processing...");
+    server_task.run().await?;
+    
     Ok(())
 }
