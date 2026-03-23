@@ -26,7 +26,7 @@ serde_yaml = "0.9"
 
 # === ML / Embeddings (Zero Python dependency, ONNX-backed) ===
 fastembed = { version = "3", default-features = false, features = ["ort-download-binaries"] }
-# Optimized ONNX Runtime config: explicit TLS backend and dylib copying
+# Optimized ONNX Runtime config: explicit TLS backend and dylib copying (Fixes Windows CI)
 ort = { version = "2.0.0-rc.12", default-features = false, features = ["download-binaries", "copy-dylibs", "tls-native"] }
 
 # === Vector Search (HNSW - In-Memory, No DB server required) ===
@@ -47,5 +47,5 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 [profile.release]
 opt-level = 3
 lto = true
-codegen-units = 1
+codegen_units = 1
 strip = true
