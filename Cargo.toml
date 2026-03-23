@@ -25,10 +25,14 @@ serde_json = "1"
 serde_yaml = "0.9"
 
 # === ML / Embeddings (Zero Python dependency, ONNX-backed) ===
+# We must ensure std is enabled for ndarray used by ort.
+# fastembed also uses ort, so we unify here.
 fastembed = { version = "3", default-features = false, features = ["ort-download-binaries"] }
-# Optimized ONNX Runtime config: explicit TLS backend and dylib copying (Fixes Windows CI)
-# Added 'std' feature to avoid ndarray NdFloat trait errors.
+# Optimized ONNX Runtime config: explicit TLS backend and std/ndarray unification.
+# 'std' feature is required for ndarray::NdFloat trait.
 ort = { version = "2.0.0-rc.12", default-features = false, features = ["download-binaries", "copy-dylibs", "tls-native", "std"] }
+# Explicitly add ndarray with std feature to resolve NdFloat trait resolution issues in CI.
+ndarray = { version = "0.15", features = ["std"] }
 
 # === Vector Search (HNSW - In-Memory, No DB server required) ===
 instant-distance = "0.6"
