@@ -25,9 +25,9 @@ serde_json = "1"
 serde_yaml = "0.9"
 
 # === ML / Embeddings (Zero Python dependency, ONNX-backed) ===
-fastembed = "3"
-# Force ONNX Runtime to use rustls for binary downloads (fixes exit 101 in CI)
-ort = { version = "2.0.0-rc.12", features = ["copy-binaries", "tls-rustls"] }
+fastembed = { version = "3", default-features = false, features = ["ort-download-binaries"] }
+# Optimized ONNX Runtime config: explicit TLS backend and dylib copying
+ort = { version = "2.0.0-rc.12", default-features = false, features = ["download-binaries", "copy-dylibs", "tls-native"] }
 
 # === Vector Search (HNSW - In-Memory, No DB server required) ===
 instant-distance = "0.6"
