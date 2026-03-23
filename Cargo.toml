@@ -1,0 +1,33 @@
+[package]
+name = "sequential-combination-rs"
+version = "1.0.0"
+edition = "2021"
+description = "Sequential Combination MCP Server - Rust Port (Zero-Dependency ML)"
+authors = ["Sequential Combination Team"]
+license = "MIT"
+
+[[bin]]
+name = "sequential-combination-rs"
+path = "src/main.rs"
+
+[dependencies]
+rmcp = { version = "0.1", features = ["server", "macros"] }
+schemars = "0.8"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+fastembed = "3"
+instant-distance = "0.6"
+regex = "1"
+walkdir = "2"
+anyhow = "1"
+thiserror = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
